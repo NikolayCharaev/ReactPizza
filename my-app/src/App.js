@@ -6,7 +6,6 @@ import Sort from './Sort';
 import PizzaBlock from './PizzaBlock';
 
 import AllPizzes from './assets/pizza.json'; // все пиццы
-console.log(AllPizzes);
 function App() {
   return (
     <>

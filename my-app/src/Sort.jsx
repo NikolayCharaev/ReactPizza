@@ -1,6 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 function Sort() {
+  const [showElem, setShowElem] = useState(false); // показываем/скрываем блок сортировки
+  const allSortItems = ['популярности', 'цене', 'алфавиту']; // массив данных для сортировки
+  const [choose, setChoose] = useState(0); // state для отображения выбранного метода сортировки
+  const sortName = allSortItems[choose] // выбор способа сортировки(укороченный вариант)
+
+  function onClickListItem(i) {
+    setChoose(i)
+    setShowElem(false)
+  }
   return (
     <>
       <div className="sort">
@@ -17,15 +26,26 @@ function Sort() {
             />
           </svg>
           <b>Сортировка по:</b>
-          <span>популярности</span>
+          <span
+            onClick={() => {
+              setShowElem(!showElem);
+            }}>
+            {sortName}
+          </span>
         </div>
-        <div className="sort__popup">
-          <ul>
-            <li className="active">популярности</li>
-            <li>цене</li>
-            <li>алфавиту</li>
-          </ul>
-        </div>
+        {showElem && (
+          <div className="sort__popup">
+            <ul>
+              {allSortItems.map((elem, i) => {
+                return (
+                  <li onClick={() => onClickListItem(i)} className={choose === i ? 'active' : ''} key={i}>
+                    {elem}
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        )}
       </div>
     </>
   );
