@@ -5,6 +5,8 @@ import Categories from './Categories';
 import Sort from './Sort';
 import PizzaBlock from './PizzaBlock';
 
+import AllPizzes from './assets/pizza.json'; // все пиццы
+console.log(AllPizzes);
 function App() {
   return (
     <>
@@ -14,15 +16,18 @@ function App() {
           <div className="container">
             <div className="content__top">
               <Categories />
-              <Sort/>
+              <Sort />
             </div>
             <h2 className="content__title">Все пиццы</h2>
             <div className="content__items">
-             <PizzaBlock title='Маргарита' price={700}/>
-             <PizzaBlock title='Деревенская' price={670}/>
-             <PizzaBlock title='Чиабатта' price={290}/>
-             <PizzaBlock title='С лососем' price={400}/>
-             
+              {
+                // рендер карточек с пиццами
+                AllPizzes.map((elem, i) => {
+                  return (
+                    <PizzaBlock key={i} {...elem}/> // укорачиваю пропсы с помощью Spread оператора
+                  );
+                })
+              }
             </div>
           </div>
         </div>
