@@ -1,12 +1,21 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './scss/app.scss';
 import Header from './Header';
 import Categories from './Categories';
 import Sort from './Sort';
 import PizzaBlock from './PizzaBlock';
 
-import AllPizzes from './assets/pizza.json'; // все пиццы
+// import AllPizzes from './assets/pizza.json'; // все пиццы
+
 function App() {
+  const [pizza, allPizzess] = useState([]);
+
+  useEffect(() => {
+    fetch('https://62b82c77f4cb8d63df59a96c.mockapi.io/items')
+      .then((data) => data.json())
+      .then((item, i) => allPizzess(item));
+  }, []);
+
   return (
     <>
       <div className="wrapper">
@@ -21,9 +30,9 @@ function App() {
             <div className="content__items">
               {
                 // рендер карточек с пиццами
-                AllPizzes.map((elem, i) => {
+                pizza.map((elem, i) => {
                   return (
-                    <PizzaBlock key={i} {...elem}/> // укорачиваю пропсы с помощью Spread оператора
+                    <PizzaBlock key={i} {...elem} /> // укорачиваю пропсы с помощью Spread оператора
                   );
                 })
               }
