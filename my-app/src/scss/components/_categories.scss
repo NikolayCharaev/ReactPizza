@@ -4,6 +4,26 @@
   ul {
     display: flex;
 
+    @media (max-width: 881px) {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-row-gap: 20px;
+      text-align: center;
+    }
+
+    @media (max-width: 636px) {
+      padding: 10px 10px;
+    }
+
+    @media (max-width: 490px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (max-width: 463px) {
+      grid-template-columns: repeat(3, 1fr);
+      padding: 5px 5px;
+    }
+
     li {
       background-color: #f9f9f9;
       padding: 13px 30px;
@@ -25,6 +45,21 @@
       &.active {
         background-color: #282828;
         color: #fff;
+      }
+
+      @media (max-width: 1312px) {
+        font-size: 13px;
+        padding: 10px 20px;
+      }
+
+      @media (max-width: 1071px) {
+        font-size: 10px;
+        padding: 15px 15px;
+      }
+      @media (max-width: 490px) {
+        padding: 5px 5px;
+      }
+      @media (max-width: 416px) {
       }
     }
   }

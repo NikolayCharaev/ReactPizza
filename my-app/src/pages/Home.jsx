@@ -16,23 +16,26 @@ const Home = () => {
         allPizzess(item);
         setIsLoading(false);
       });
+    window.scrollTo(0, 0);
   }, []);
   return (
     <>
-      <div className="content__top">
-        <Categories />
-        <Sort />
-      </div>
-      <h2 className="content__title">Все пиццы</h2>
-      <div className="content__items">
-        {isLoading
-          ? [...new Array(6)].map((elem, i) => {
-              // фейковый массив для рендеринга скелетона
-              return <Skeleton key={i} />;
-            })
-          : pizza.map((elem, i) => {
-              return <PizzaBlock key={i} {...elem} />;
-            })}
+      <div className="container">
+        <div className="content__top">
+          <Categories />
+          <Sort />
+        </div>
+        <h2 className="content__title">Все пиццы</h2>
+        <div className="content__items">
+          {isLoading
+            ? [...new Array(6)].map((elem, i) => {
+                // фейковый массив для рендеринга скелетона
+                return <Skeleton key={i} />;
+              })
+            : pizza.map((elem, i) => {
+                return <PizzaBlock key={i} {...elem} />;
+              })}
+        </div>
       </div>
     </>
   );
