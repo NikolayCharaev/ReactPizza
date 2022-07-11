@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
-function Categories() {
-  const [activeIndex, setActiveIndex] = useState(0); // работа с добавлением класса активности
+function Categories({categoryId,setCategoryId}) {
+
 
   const categories = ['Все', 'Мясные', 'Вегетерианская', 'Гриль', 'Острые', 'Закрытые'];
   return (
@@ -11,8 +11,8 @@ function Categories() {
           {categories.map((elem, i) => {
             return (
               <li
-                onClick={() => setActiveIndex(i)} // добавление класса активности для категорий
-                className={activeIndex === i ? 'active' : ''}
+                onClick={() => setCategoryId(i)} // добавление класса активности для категорий
+                className={categoryId === i ? 'active' : ''}
                 key={i}>
                 {elem}
               </li>

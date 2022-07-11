@@ -1,14 +1,18 @@
 import React, { useState } from 'react';
 
-function Sort() {
+function Sort({ sortType, setSortType }) {
   const [showElem, setShowElem] = useState(false); // показываем/скрываем блок сортировки
-  const allSortItems = ['популярности', 'цене', 'алфавиту']; // массив данных для сортировки
-  const [choose, setChoose] = useState(0); // state для отображения выбранного метода сортировки
-  const sortName = allSortItems[choose] // выбор способа сортировки(укороченный вариант)
+  const allSortItems = [{name:'популярности(asc)', sort: 'rating'},
+  {name:'популярности(desc)', sort: '-rating'},
+   {name:'цене(asc)', sort:'price'},
+   {name:'цене(desc)', sort:'-price'},
+  {name:'алфавиту(asc)', sort: 'title'},
+  {name:'алфавиту(desc)', sort: '-title'}]; // массив данных для сортировки
+
 
   function onClickListItem(i) {
-    setChoose(i)
-    setShowElem(false)
+    setSortType(i);
+    setShowElem(false);
   }
   return (
     <>
@@ -30,16 +34,19 @@ function Sort() {
             onClick={() => {
               setShowElem(!showElem);
             }}>
-            {sortName}
+            {sortType.name}
           </span>
         </div>
         {showElem && (
           <div className="sort__popup">
             <ul>
-              {allSortItems.map((elem, i) => {
+              {allSortItems.map((obj, i) => {
                 return (
-                  <li onClick={() => onClickListItem(i)} className={choose === i ? 'active' : ''} key={i}>
-                    {elem}
+                  <li
+                    onClick={() => onClickListItem(obj)}
+                    className={sortType.sort === obj.sort ? 'active' : ''}
+                    key={i}>
+                    {obj.name}
                   </li>
                 );
               })}
