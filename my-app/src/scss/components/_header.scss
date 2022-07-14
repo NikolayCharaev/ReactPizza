@@ -5,19 +5,33 @@
   padding: 40px 0;
   position: relative;
 
+
+
   .container {
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    @media (max-width: 1071px) {
+      flex-wrap: wrap;
+      // align-items: center;
+      justify-content: center;
+    }
+
   }
+
+
 
   &__logo {
     display: flex;
 
     @media (max-width: 1071px) {
+      margin-bottom: 30px;
       font-size: 12px;
       padding: 5px 15px;
     }
+
+ 
 
     @media (max-width: 570px) {
       font-size: 10px;
