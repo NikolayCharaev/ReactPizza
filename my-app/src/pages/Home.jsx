@@ -6,8 +6,11 @@ import Skeleton from '../PizzaBlock/Skeleton';
 import PizzaBlock from '../PizzaBlock';
 import Categories from '../Categories';
 import Sort from '../Sort';
+import { SearchContent } from '../App';
+import { useContext } from 'react';
 
-const Home = ({ searchValue }) => {
+const Home = () => {
+  const {searchValue} = useContext(SearchContent);
   const [pizza, allPizzess] = useState([]);
   const [isLoading, setIsLoading] = useState([true]); //флаг для скелетона
   const [categoryId, setCategoryId] = useState(0); // работа с добавлением класса активности
@@ -27,7 +30,7 @@ const Home = ({ searchValue }) => {
 
     setIsLoading(true);
     fetch(
-      `https://62b82c77f4cb8d63df59a96c.mockapi.io/items?&page=${page}&limit=4${category}&sortBy=${sortBy}&order=${
+      `https://62b82c77f4cb8d63df59a96c.mockapi.io/items?&page=${page}&limit=4&${category}&sortBy=${sortBy}&order=${
         order 
       }${search}`,
     )
