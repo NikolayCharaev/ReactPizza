@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 const Cart = () => {
+  console.log('Hello')
   return (
     <>
           <div className="container ">
