@@ -1,17 +1,25 @@
 import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { setSort } from './redux/slices/filterSlice';
 
-function Sort({ sortType, setSortType }) {
+const allSortItems = [
+  { name: 'популярности(asc)', sort: 'rating' },
+  { name: 'популярности(desc)', sort: '-rating' },
+  { name: 'цене(asc)', sort: 'price' },
+  { name: 'цене(desc)', sort: '-price' },
+  { name: 'алфавиту(asc)', sort: 'title' },
+  { name: 'алфавиту(desc)', sort: '-title' },
+]; // массив данных для сортировки
+
+
+function Sort() {
+  const dispatch = useDispatch();
+  const sort = useSelector((state) => state.filterSlice.sortProperty);
+  console.log(sort);
   const [showElem, setShowElem] = useState(false); // показываем/скрываем блок сортировки
-  const allSortItems = [{name:'популярности(asc)', sort: 'rating'},
-  {name:'популярности(desc)', sort: '-rating'},
-   {name:'цене(asc)', sort:'price'},
-   {name:'цене(desc)', sort:'-price'},
-  {name:'алфавиту(asc)', sort: 'title'},
-  {name:'алфавиту(desc)', sort: '-title'}]; // массив данных для сортировки
-
-
-  function onClickListItem(i) {
-    setSortType(i);
+  
+  function onClickListItem(obj) {
+    dispatch(setSort(obj))
     setShowElem(false);
   }
   return (
@@ -34,7 +42,7 @@ function Sort({ sortType, setSortType }) {
             onClick={() => {
               setShowElem(!showElem);
             }}>
-            {sortType.name}
+            {sort.name}
           </span>
         </div>
         {showElem && (
@@ -44,7 +52,7 @@ function Sort({ sortType, setSortType }) {
                 return (
                   <li
                     onClick={() => onClickListItem(obj)}
-                    className={sortType.sort === obj.sort ? 'active' : ''}
+                    className={sort.sort === obj.sort ? 'active' : ''}
                     key={i}>
                     {obj.name}
                   </li>
