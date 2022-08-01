@@ -9,6 +9,7 @@ import { useContext } from 'react';
 import { setCategoryId, setCurrentPage} from '../redux/slices/filterSlice';
 import { useSelector, useDispatch } from 'react-redux';
 import { store } from '../redux/store';
+import axios from 'axios'
 
 
 const Home = () => {
@@ -24,6 +25,7 @@ const Home = () => {
   const onChangePage = (number) => {
       dispatch (setCurrentPage(number))
   }
+  
 
   const { searchValue } = useContext(SearchContent);
   const [pizza, allPizzess] = useState([]);
@@ -42,10 +44,10 @@ const Home = () => {
     const search = searchValue ? `&search=${searchValue}` : '';
 
     setIsLoading(true);
-    fetch(
+    axios.get(
       `https://62b82c77f4cb8d63df59a96c.mockapi.io/items?&page=${currentPage}&limit=4&${category}&sortBy=${sortBy}&order=${order}${search}`,
     )
-      .then((data) => data.json())
+      .then((data) => data.data)
       .then((item, i) => {
         allPizzess(item);
         setIsLoading(false);
