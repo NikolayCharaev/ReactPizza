@@ -15,7 +15,6 @@ const allSortItems = [
 function Sort() {
   const dispatch = useDispatch();
   const sort = useSelector((state) => state.filterSlice.sortProperty);
-  console.log(sort);
   const [showElem, setShowElem] = useState(false); // показываем/скрываем блок сортировки
   
   function onClickListItem(obj) {

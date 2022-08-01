@@ -1,24 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import Pagination from '../Pagination';
-
 import Skeleton from '../PizzaBlock/Skeleton';
-
 import PizzaBlock from '../PizzaBlock';
 import Categories from '../Categories';
 import Sort from '../Sort';
 import { SearchContent } from '../App';
 import { useContext } from 'react';
-import { setCategoryId } from '../redux/slices/filterSlice';
+import { setCategoryId, setCurrentPage} from '../redux/slices/filterSlice';
 import { useSelector, useDispatch } from 'react-redux';
 import { store } from '../redux/store';
+
 
 const Home = () => {
   const categoryId = useSelector((state) => state.filterSlice.categoryId);
   const sortType = useSelector((state) => state.filterSlice.sortProperty.sort);
+  const currentPage = useSelector ((state) => state.filterSlice.currentPage)
   const dispatch = useDispatch()
 
   function onChangeCategory (id) {
     dispatch(setCategoryId(id))
+  }
+
+  const onChangePage = (number) => {
+      dispatch (setCurrentPage(number))
   }
 
   const { searchValue } = useContext(SearchContent);
@@ -29,7 +33,6 @@ const Home = () => {
   //   name: 'популярности',
   //   sort: 'rating',
   // }); // state для отображения выбранного метода сортировки
-  const [page, setPage] = useState(1);
   // console.log(categoryId, sortType);
 
   useEffect(() => {
@@ -40,7 +43,7 @@ const Home = () => {
 
     setIsLoading(true);
     fetch(
-      `https://62b82c77f4cb8d63df59a96c.mockapi.io/items?&page=${page}&limit=4&${category}&sortBy=${sortBy}&order=${order}${search}`,
+      `https://62b82c77f4cb8d63df59a96c.mockapi.io/items?&page=${currentPage}&limit=4&${category}&sortBy=${sortBy}&order=${order}${search}`,
     )
       .then((data) => data.json())
       .then((item, i) => {
@@ -48,7 +51,7 @@ const Home = () => {
         setIsLoading(false);
       });
     window.scrollTo(0, 0);
-  }, [categoryId, sortType, searchValue, page]);
+  }, [categoryId, sortType, searchValue, currentPage]);
 
   const skeletons = [...new Array(6)].map((elem, i) => {
     // фейковый массив для рендеринга скелетона
@@ -67,7 +70,7 @@ const Home = () => {
         </div>
         <h2 className="content__title">Все пиццы</h2>
         <div className="content__items">{isLoading ? skeletons : pizzas}</div>
-        <Pagination setPage={(num) => setPage(num)} />
+        <Pagination currentPage={currentPage} setPage={onChangePage} />
       </div>
     </>
   );
