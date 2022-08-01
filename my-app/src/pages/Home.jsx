@@ -61,6 +61,8 @@ const Home = () => {
     return <PizzaBlock key={i} {...elem} />;
   });
 
+  console.log('Hello')
+
   return (
     <>
       <div className="container">
