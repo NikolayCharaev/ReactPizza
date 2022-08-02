@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { setSort } from './redux/slices/filterSlice';
 
@@ -11,19 +11,33 @@ const allSortItems = [
   { name: 'алфавиту(desc)', sort: '-title' },
 ]; // массив данных для сортировки
 
-
 function Sort() {
   const dispatch = useDispatch();
   const sort = useSelector((state) => state.filterSlice.sortProperty);
   const [showElem, setShowElem] = useState(false); // показываем/скрываем блок сортировки
-  
+  const sortRef = useRef();
+
   function onClickListItem(obj) {
-    dispatch(setSort(obj))
+    dispatch(setSort(obj));
     setShowElem(false);
   }
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (!event.path.includes(sortRef.current)) {
+        console.log('hello')
+        setShowElem(showElem);
+    }
+  }
+    document.body.addEventListener('click',handleClickOutside)
+    return () => {
+      document.body.removeEventListener('click',handleClickOutside)
+    }
+  },
+  []);
   return (
     <>
-      <div className="sort">
+      <div ref={sortRef} className="sort">
         <div className="sort__label">
           <svg
             width="10"
