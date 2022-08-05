@@ -19,6 +19,11 @@ body {
 .content {
   padding: 40px 0;
 
+  &__error-info {
+    text-align: center;
+   
+    margin: 100px 0 200px;
+  }
   &__title {
     margin: 35px 0;
   }
@@ -129,7 +134,7 @@ body {
     }
   }
 
-  .content__items{
+  .content__items {
     display: flex;
     flex-direction: column;
   }
