@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { SearchContent } from './App';
+import { setSearchValueData } from './redux/slices/filterSlice';
 import Search from './Search';
 import { useContext } from 'react';
 import {useSelector} from 'react-redux'

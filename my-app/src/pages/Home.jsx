@@ -13,12 +13,18 @@ import { store } from '../redux/store';
 import { fetchPizzas } from '../redux/slices/pizzasSlice';
 import pizzasSlice from '../redux/slices/pizzasSlice';
 import CartEmpty from '../CartEmpty';
+import { selectorCart } from '../redux/slices/pizzasSlice';
+// import { setSearchValueData } from '../redux/slices/filterSlice';
+import {setSearchValueData}  from '../redux/slices/filterSlice';
 
 const Home = () => {
   const categoryId = useSelector((state) => state.filterSlice.categoryId);
   const sortType = useSelector((state) => state.filterSlice.sortProperty.sort);
   const currentPage = useSelector((state) => state.filterSlice.currentPage);
-  const { items, status } = useSelector((state) => state.pizzasSlice);
+
+  const searchValue = useSelector((state) => state.filterSlice.setSearchValueData)
+ 
+  const { items, status } = useSelector(selectorCart);
   const dispatch = useDispatch();
 
   function onChangeCategory(id) {
@@ -29,7 +35,7 @@ const Home = () => {
     dispatch(setCurrentPage(number));
   };
 
-  const { searchValue } = useContext(SearchContent);
+  // const { searchValue } = useContext(SearchContent);
   // const [pizza, allPizzes] = useState([]);
 
   const getPizzas = async () => {

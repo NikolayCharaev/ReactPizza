@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { setSort } from './redux/slices/filterSlice';
+import { selectSort, setSort } from './redux/slices/filterSlice';
 
 const allSortItems = [
   { name: 'популярности(asc)', sort: 'rating' },
@@ -13,7 +13,7 @@ const allSortItems = [
 
 function Sort() {
   const dispatch = useDispatch();
-  const sort = useSelector((state) => state.filterSlice.sortProperty);
+  const sort = useSelector(selectSort);
   const [showElem, setShowElem] = useState(false); // показываем/скрываем блок сортировки
   const sortRef = useRef();
 
@@ -25,7 +25,6 @@ function Sort() {
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (!event.path.includes(sortRef.current)) {
-        console.log('hello')
         setShowElem(showElem);
     }
   }
