@@ -1,13 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { SearchContent } from './App';
-import { setSearchValueData } from './redux/slices/filterSlice';
 import Search from './Search';
-import { useContext } from 'react';
 import {useSelector} from 'react-redux'
 
+// import { SearchContent } from './App';
+// import { setSearchValueData } from './redux/slices/filterSlice';
+// import { useDispatch } from 'react-redux';
+
+
 function Header() {
-  const { searchValue, setSearchValue } = useContext(SearchContent);
+  // const { searchValue, setSearchValue } = useContext(SearchContent);
  
   const { items, totalPrice} = useSelector(state => state.cartSlice)
 
@@ -28,7 +30,7 @@ function Header() {
               </div>
             </div>
           </Link>
-          <Search searchValue={searchValue} setSearchVal ue={setSearchValue} />
+          <Search  />
           <div className="header__cart">
             <Link to="/cart" className="button button--cart">
               <span>{totalPrice} ₽</span>

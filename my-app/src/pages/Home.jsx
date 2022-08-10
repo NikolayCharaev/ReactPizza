@@ -1,29 +1,29 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import Pagination from '../Pagination';
 import Skeleton from '../PizzaBlock/Skeleton';
 import PizzaBlock from '../PizzaBlock';
 import Categories from '../Categories';
 import Sort from '../Sort';
-import { SearchContent } from '../App';
-import { useContext } from 'react';
 import { setCategoryId, setCurrentPage } from '../redux/slices/filterSlice';
 import { useSelector, useDispatch } from 'react-redux';
-import { store } from '../redux/store';
-// import axios from 'axios';
 import { fetchPizzas } from '../redux/slices/pizzasSlice';
-import pizzasSlice from '../redux/slices/pizzasSlice';
-import CartEmpty from '../CartEmpty';
 import { selectorCart } from '../redux/slices/pizzasSlice';
-// import { setSearchValueData } from '../redux/slices/filterSlice';
-import {setSearchValueData}  from '../redux/slices/filterSlice';
+
+// import { store } from '../redux/store';
+// // import axios from 'axios';
+// import pizzasSlice from '../redux/slices/pizzasSlice';
+// import CartEmpty from '../CartEmpty';
+// // import { setSearchValueData } from '../redux/slices/filterSlice';
+// import {setSearchValueData}  from '../redux/slices/filterSlice';
+// import { SearchContent } from '../App';
+// import { useContext } from 'react';
 
 const Home = () => {
   const categoryId = useSelector((state) => state.filterSlice.categoryId);
   const sortType = useSelector((state) => state.filterSlice.sortProperty.sort);
   const currentPage = useSelector((state) => state.filterSlice.currentPage);
+  const searchValue = useSelector((state) => state.filterSlice.searchValue);
 
-  const searchValue = useSelector((state) => state.filterSlice.setSearchValueData)
- 
   const { items, status } = useSelector(selectorCart);
   const dispatch = useDispatch();
 
@@ -78,7 +78,7 @@ const Home = () => {
         </div>
         <h2 className="content__title">Все пиццы</h2>
         {status === 'error' ? (
-          <div className='content__error-info'>
+          <div className="content__error-info">
             <h2>Произошла ошибка =(</h2>
             <p>Пожалуйста, сходите нахуй</p>
           </div>

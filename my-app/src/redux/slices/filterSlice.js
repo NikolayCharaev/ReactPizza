@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
-  searchVaue: '',
+  searchValue: '',
   categoryId: 0,
   currentPage: 1,
   sortProperty: { name: 'популярности(asc)', sort: 'rating' },
@@ -14,7 +14,7 @@ const filterSlice = createSlice({
       state.categoryId = action.payload;
     },
     setSearchValueData(state, action) {
-      state.searchVaue = action.payload;
+      state.searchValue = action.payload;
     },
     setSort(state, action) {
       state.sortProperty = action.payload;

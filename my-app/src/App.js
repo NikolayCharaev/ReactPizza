@@ -6,15 +6,15 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import NotFound from './pages/NotFound';
 import Cart from './pages/Cart';
 
-export const SearchContent = createContext();
+// export const SearchContent = createContext();
 
 function App() {
-  const [searchValue, setSearchValue] = useState('');
+  // const [searchValue, setSearchValue] = useState('');
 
   return (
     <>
       <div className="wrapper">
-        <SearchContent.Provider value={{ searchValue, setSearchValue }}>
+        {/* <SearchContent.Provider value={{ searchValue, setSearchValue }}> */}
           <Header />
           <div className="content">
             <Routes>
@@ -23,7 +23,7 @@ function App() {
               <Route path="/cart" element={<Cart />} />
             </Routes>
           </div>
-        </SearchContent.Provider>
+        {/* </SearchContent.Provider> */}
       </div>
     </>
   );
