@@ -2,21 +2,13 @@ import React, { useEffect } from 'react';
 import Pagination from '../Pagination';
 import Skeleton from '../PizzaBlock/Skeleton';
 import PizzaBlock from '../PizzaBlock';
+import { Link } from 'react-router-dom';
 import Categories from '../Categories';
 import Sort from '../Sort';
 import { setCategoryId, setCurrentPage } from '../redux/slices/filterSlice';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchPizzas } from '../redux/slices/pizzasSlice';
 import { selectorCart } from '../redux/slices/pizzasSlice';
-
-// import { store } from '../redux/store';
-// // import axios from 'axios';
-// import pizzasSlice from '../redux/slices/pizzasSlice';
-// import CartEmpty from '../CartEmpty';
-// // import { setSearchValueData } from '../redux/slices/filterSlice';
-// import {setSearchValueData}  from '../redux/slices/filterSlice';
-// import { SearchContent } from '../App';
-// import { useContext } from 'react';
 
 const Home = () => {
   const categoryId = useSelector((state) => state.filterSlice.categoryId);
@@ -34,9 +26,6 @@ const Home = () => {
   const onChangePage = (number) => {
     dispatch(setCurrentPage(number));
   };
-
-  // const { searchValue } = useContext(SearchContent);
-  // const [pizza, allPizzes] = useState([]);
 
   const getPizzas = async () => {
     const sortBy = sortType.replace('-', '');
@@ -66,7 +55,11 @@ const Home = () => {
     return <Skeleton key={i} />;
   });
   const pizzas = items.map((elem, i) => {
-    return <PizzaBlock key={i} {...elem} />;
+    return (
+      <Link key={i} to={`/pizza/${elem.id}`}>
+        <PizzaBlock {...elem} />
+      </Link>
+    );
   });
 
   return (
@@ -80,7 +73,7 @@ const Home = () => {
         {status === 'error' ? (
           <div className="content__error-info">
             <h2>Произошла ошибка =(</h2>
-            <p>Пожалуйста, сходите нахуй</p>
+            <p>повторите попытку позже.</p>
           </div>
         ) : (
           <div className="content__items">{status === 'loading' ? skeletons : pizzas}</div>

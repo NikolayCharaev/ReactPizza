@@ -19,7 +19,7 @@ const Cart = () => {
   }, 0);
 
   if (!totalPrice) {
-   return <CartEmpty/>
+    return <CartEmpty />;
   }
 
   return (
