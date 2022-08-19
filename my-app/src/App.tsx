@@ -1,6 +1,4 @@
-import React, { createContext, useEffect, useState } from 'react';
 import './scss/app.scss';
-import Header from './Header';
 import Home from './pages/Home';
 import {  Routes, Route } from 'react-router-dom';
 import NotFound from './pages/NotFound';

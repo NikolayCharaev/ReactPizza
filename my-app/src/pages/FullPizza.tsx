@@ -3,10 +3,16 @@ import { useParams, useNavigate } from 'react-router';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
-const FullPizza = () => {
+const FullPizza: React.FC = () => {
+
   const navigate = useNavigate();
-  const [pizza, setPizza] = useState();
+  const [pizza, setPizza] = useState<{
+    imageUrl : string,
+    title : string,
+    price : number
+  }>();
   const { id } = useParams();
+
 
   useEffect(() => {
     async function fetchPizzas() {
@@ -14,7 +20,7 @@ const FullPizza = () => {
         const { data } = await axios.get(`https://62b82c77f4cb8d63df59a96c.mockapi.io/items/${id}`);
         setPizza(data);
       } catch {
-        navigate('/', { replace: true });
+        navigate('/');
         alert('Такой пиццы нет :(');
       }
     }
@@ -33,7 +39,6 @@ const FullPizza = () => {
             <span>Вернуться назад</span>
           </Link>
           </div>
-       
         </div>
       ) : (
         <h1>Загрузка...</h1>
@@ -42,4 +47,9 @@ const FullPizza = () => {
   );
 };
 
+
 export default FullPizza;
+
+
+
+
